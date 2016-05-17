@@ -17,15 +17,15 @@ get '/address' do
   results ={
   address: '3 ARGYLE HOUSE',
   building: 'CODEBASE',
-  postcode: 'e13 zqf'.upcase,
+  postcode: WordFormatter.new('e13 zqf').make_upcase,
   phone: '0131558030'
 }
 return results.to_json
 end
 
 get '/camelcase/:string' do
-  result = WordFormatter.new('code clan')
-  return result.make_camelcase(params[:string])
-
+  @result = WordFormatter.new(params[:string])
+  return @result.make_camelcase
+  erb :camelcase
 end
 
